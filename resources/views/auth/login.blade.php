@@ -6,7 +6,7 @@
     @csrf
     <div class="mb-3">
         <label>Email:</label>
-        <input type="email" name="email" class="form-control" required>
+        <input type="email" name="usr_email" class="form-control" required>
     </div>
     <div class="mb-3">
         <label>Password:</label>

@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\VotingController;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotificationController;    
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,12 @@ use App\Http\Controllers\NotificationController;
 */
 
 // ================== AUTHENTICATION ==================
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/login', 'Auth\LoginController@login');
-Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 // ================== REGISTER (akses kesiswaan) ==================
 Route::middleware(['auth', 'role:kesiswaan'])->group(function () {

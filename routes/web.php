@@ -18,22 +18,49 @@ use App\Http\Controllers\NotificationController;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+// ================== AUTHENTICATION ==================
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
-// Candidates
-Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates.manage');
-Route::get('/candidates/add', [CandidateController::class, 'create'])->name('candidates.add');
-Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidates.store');
-
-// Voting
-Route::get('/voting', [VotingController::class, 'index'])->name('voting');
-
-// Result
-Route::get('/results', [ResultController::class, 'index'])->name('results');
-
-// Notification
-Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications');
-
-Route::get('/', function () {
-    return view('welcome');
+// ================== REGISTER (akses kesiswaan) ==================
+Route::middleware(['auth', 'role:kesiswaan'])->group(function () {
+    Route::get('/register/add', 'RegisterController@create');
+    Route::post('/register/add', 'RegisterController@store');
+    Route::get('/register/edit/{id}', 'RegisterController@edit');
+    Route::post('/register/edit/{id}', 'RegisterController@update');
+    Route::delete('/register/remove/{id}', 'RegisterController@destroy');
 });
+
+// ================== JADWAL PEMILIHAN ==================
+Route::middleware(['auth', 'role:kesiswaan'])->group(function () {
+    Route::get('/vote/schedule/add', 'VoteScheduleController@create');
+    Route::post('/vote/schedule/add', 'VoteScheduleController@store');
+    Route::get('/vote/schedule/edit/{id}', 'VoteScheduleController@edit');
+    Route::post('/vote/schedule/edit/{id}', 'VoteScheduleController@update');
+    Route::delete('/vote/schedule/remove/{id}', 'VoteScheduleController@destroy');
+});
+
+// ================== PEMILIHAN ==================
+Route::middleware(['auth'])->group(function () {
+    Route::get('/vote/{id}', 'VoteController@show'); // profil + visi misi
+    Route::post('/vote/{id}/vote', 'VoteController@vote'); // memilih kandidat
+
+    // khusus kesiswaan
+    Route::middleware('role:kesiswaan')->group(function () {
+        Route::get('/vote/{id}/add', 'VoteController@create');
+        Route::post('/vote/{id}/add', 'VoteController@store');
+        Route::get('/vote/{id}/edit', 'VoteController@edit');
+        Route::post('/vote/{id}/edit', 'VoteController@update');
+        Route::delete('/vote/{id}/remove', 'VoteController@destroy');
+    });
+});
+
+// ================== KELOLA DATA HASIL ==================
+Route::middleware(['auth', 'role:kesiswaan'])->get('/vote/interim-result', 'ResultController@interim');
+
+// ================== LAPORAN ==================
+Route::middleware(['auth', 'role:kesiswaan|osis'])->group(function () {
+    Route::get('/vote/report-result', 'ReportController@finalResult');
+});
+Route::middleware(['auth', 'role:kesiswaan'])->get('/vote/absention-result', 'ReportController@absention');

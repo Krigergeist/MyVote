@@ -9,8 +9,8 @@
   <div class="container">
     <a class="navbar-brand fw-bold" href="index.html">Voting App</a>
     <div class="d-flex">
-      <a href="login.blade.php" class="btn btn-outline-light me-2">Login</a>
-      <a href="register.blade.php" class="btn btn-warning">Register</a>
+      <a href="login" class="btn btn-outline-light me-2">Login</a>
+      <a href="register" class="btn btn-warning">Register</a>
     </div>
   </div>
 </nav>

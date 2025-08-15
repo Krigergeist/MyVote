@@ -1,77 +1,83 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+<style>
+    
+:root{ --radius: 16px; }
+html,body{ background:#f7f8fb; }
+.navbar-brand{ font-weight:700; letter-spacing:.3px }
+.card{ border-radius: var(--radius); }
+.hero{
+  background: linear-gradient(135deg,#0d6efd 0%,#6610f2 100%);
+  color:#fff; border-radius:22px; padding:64px 28px;
+  position:relative; overflow:hidden;
+}
+.hero::after{
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(600px 200px at 80% 10%, rgba(255,255,255,.15), transparent 40%);
+  pointer-events:none;
+}
+.hero-img{ max-width:420px; border-radius:18px; box-shadow:0 20px 40px rgba(0,0,0,.25) }
+.feature-card{ border-radius:18px }
+.sidebar-sticky{ position:sticky; top:1rem }
+.list-group-item{ border-radius:12px; margin-bottom:.5rem }
+.avatar-sm{ width:46px; height:46px; object-fit:cover; border-radius:10px; border:1px solid #e5e7eb }
+.avatar-md{ width:120px; height:120px; object-fit:cover; border-radius:12px; border:1px solid #e5e7eb }
+.dropzone{
+  border:2px dashed #ced4da; border-radius:12px; padding:20px;
+  background:#fff; color:#6c757d; text-align:center; cursor:pointer;
+}
+.dropzone.dragover{ background:#e9f5ff; border-color:#0d6efd; color:#0d6efd }
+.shadow-soft{ box-shadow:0 12px 28px rgba(0,0,0,.08) }
+footer.footer-black{ background:#000; color:#fff; }
+footer.footer-black a{ color:#fff; text-decoration:none; }
+footer .bi{ vertical-align: -0.125em; }
+.container-narrow{ max-width: 980px; }
+</style>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card p-4 shadow-soft">
+        <h3 class="mb-3 text-center">Register</h3>
+        <form id="registerForm">
+          <div class="mb-3"><label>Name</label><input type="text" id="regName" class="form-control" required></div>
+          <div class="mb-3"><label>Email</label><input type="email" id="regEmail" class="form-control" required></div>
+          <div class="mb-3"><label>Password</label><input type="password" id="regPassword" class="form-control" required></div>
+          <div class="mb-3"><label>Role</label><select id="regRole" class="form-control"><option value="user">User</option><option value="admin">Admin</option></select></div>
+          <button class="btn btn-success w-100">Register</button>
+        </form>
+        <p class="mt-3 text-center">Sudah punya akun? <a href="login.html">Login</a></p>
+      </div>
     </div>
+  </div>
 </div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  const user = JSON.parse(localStorage.getItem('user')||'null');
+  if(user && user.email===email && user.password===password){
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+    if(user.role==='admin'){ 
+      location.href='admin-manage.html'; 
+    } else { 
+      if(localStorage.getItem('hasVoted:'+email)==='true'){ 
+        alert('Anda sudah voting. Menampilkan hasil.');
+        location.href='results.html'; 
+      } else { 
+        location.href='voting.html'; 
+      }
+    }
+  } else {
+    alert('Invalid credentials');
+  }
+});
+</script>
 @endsection

@@ -16,8 +16,11 @@ use App\Http\Controllers\NotificationController;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
-|
 */
+
+// ================== DASHBOARD ==================
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // ================== AUTHENTICATION ==================
 
@@ -47,8 +50,8 @@ Route::middleware(['auth', 'role:kesiswaan'])->group(function () {
 
 // ================== PEMILIHAN ==================
 Route::middleware(['auth'])->group(function () {
-    Route::get('/vote/{id}', 'VoteController@show'); // profil + visi misi
-    Route::post('/vote/{id}/vote', 'VoteController@vote'); // memilih kandidat
+    Route::get('/vote/{id}', 'VoteController@show');
+    Route::post('/vote/{id}/vote', 'VoteController@vote'); 
 
     // khusus kesiswaan
     Route::middleware('role:kesiswaan')->group(function () {

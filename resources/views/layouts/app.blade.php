@@ -3,11 +3,24 @@
 <head>
     <title>MyVote</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+      footer.footer-black {
+        background: #000;
+        color: #fff;
+      }
+      footer.footer-black a {
+        color: #fff;
+        text-decoration: none;
+      }
+      footer .bi {
+        vertical-align: -0.125em;
+      }
+    </style>
 </head>
 <body style=" zoom: 150%;">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="index.html">Voting App</a>
+    <a class="navbar-brand fw-bold" href="index.html">MyVote</a>
     <div class="d-flex">
       <a href="login" class="btn btn-outline-light me-2">Login</a>
       <a href="register" class="btn btn-warning">Register</a>
@@ -23,13 +36,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 mb-3">
-        <h5 class="text-white">e-Voting System</h5>
+        <h5 class="text-white">MyVote</h5>
         <p class="mb-0">Sistem pemilihan kandidat online yang aman, cepat, dan transparan.</p>
       </div>
       <div class="col-md-4 mb-3">
         <h5 class="text-white">Contact Us</h5>
-        <p class="mb-1">Jl. Contoh No. 123, Jakarta</p>
-        <p class="mb-1">support@evoting.com</p>
+        <p class="mb-1">Jl. Katapang Andir No.Km 2, Bandung</p>
+        <p class="mb-1">support@myvote.com</p>
         <p class="mb-0">+62 812-3456-7890</p>
       </div>
       <div class="col-md-4 mb-3">
@@ -41,13 +54,11 @@
     </div>
     <hr class="border-secondary">
     <div class="text-center">
-      <small>© 2025 e-Voting. All Rights Reserved.</small>
+      <small>© 2025 MyVote. All Rights Reserved.</small>
     </div>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
 </body>
 </html>

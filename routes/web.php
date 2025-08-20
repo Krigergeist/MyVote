@@ -2,42 +2,42 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\VotingController;
-use App\Http\Controllers\NotificationController;    
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-*/
-
-// ================== DASHBOARD ==================
-
+// Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-// ================== AUTHENTICATION ==================
-
-
+// Authentication
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// Registration
+Route::get('/register/add', [RegisterController::class, 'create'])->name('register.add');
+Route::post('/register/add', [RegisterController::class, 'store'])->name('register.store');
 
-// ================== REGISTER (akses kesiswaan) ==================
-Route::middleware(['auth', 'role:kesiswaan'])->group(function () {
-    Route::get('/register/add', 'RegisterController@create');
-    Route::post('/register/add', 'RegisterController@store');
+// Candidate management
+Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates.index');
+Route::get('/candidates/add', [CandidateController::class, 'create'])->name('candidates.create');
+Route::post('/candidates/add', [CandidateController::class, 'store'])->name('candidates.store');
+Route::get('/candidates/edit/{id}', [CandidateController::class, 'edit'])->name('candidates.edit');
+Route::post('/candidates/edit/{id}', [CandidateController::class, 'update'])->name('candidates.update');
+Route::delete('/candidates/remove/{id}', [CandidateController::class, 'destroy'])->name('candidates.destroy');
+
+// Voting
+Route::get('/vote/{id}', [VotingController::class, 'show'])->name('vote.show');
+Route::post('/vote/{id}/vote', [VotingController::class, 'vote'])->name('vote.vote');
+
+// Results
+Route::get('/results', [ResultController::class, 'index'])->name('results.index');
     Route::get('/register/edit/{id}', 'RegisterController@edit');
     Route::post('/register/edit/{id}', 'RegisterController@update');
     Route::delete('/register/remove/{id}', 'RegisterController@destroy');
-});
+
 
 // ================== JADWAL PEMILIHAN ==================
 Route::middleware(['auth', 'role:kesiswaan'])->group(function () {

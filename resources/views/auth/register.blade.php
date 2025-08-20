@@ -44,40 +44,33 @@ footer .bi{ vertical-align: -0.125em; }
     <div class="col-md-6">
       <div class="card p-4 shadow-soft">
         <h3 class="mb-3 text-center">Register</h3>
-        <form id="registerForm">
-          <div class="mb-3"><label>Name</label><input type="text" id="regName" class="form-control" required></div>
-          <div class="mb-3"><label>Email</label><input type="email" id="regEmail" class="form-control" required></div>
-          <div class="mb-3"><label>Password</label><input type="password" id="regPassword" class="form-control" required></div>
-          <div class="mb-3"><label>Role</label><select id="regRole" class="form-control"><option value="user">User</option><option value="admin">Admin</option></select></div>
-          <button class="btn btn-success w-100">Register</button>
+        <form method="POST" action="{{ route('register.store') }}">
+          @csrf
+          <div class="mb-3">
+            <label>Name</label>
+            <input type="text" name="usr_name" class="form-control" required value="{{ old('usr_name') }}">
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="usr_email" class="form-control" required value="{{ old('usr_email') }}">
+          </div>
+          <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="usr_password" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Role</label>
+            <select name="usr_role" class="form-control" required>
+              <option value="user" {{ old('usr_role')=='user'?'selected':'' }}>User</option>
+              <option value="admin" {{ old('usr_role')=='admin'?'selected':'' }}>Admin</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Register</button>
         </form>
-        <p class="mt-3 text-center">Sudah punya akun? <a href="login.html">Login</a></p>
+        <p class="mt-3 text-center">Sudah punya akun? <a href="{{ route('login') }}">Login</a></p>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-document.getElementById('loginForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
-  const user = JSON.parse(localStorage.getItem('user')||'null');
-  if(user && user.email===email && user.password===password){
-    localStorage.setItem('loggedInUser', JSON.stringify(user));
-    if(user.role==='admin'){ 
-      location.href='admin-manage.html'; 
-    } else { 
-      if(localStorage.getItem('hasVoted:'+email)==='true'){ 
-        alert('Anda sudah voting. Menampilkan hasil.');
-        location.href='results.html'; 
-      } else { 
-        location.href='voting.html'; 
-      }
-    }
-  } else {
-    alert('Invalid credentials');
-  }
-});
-</script>
 @endsection

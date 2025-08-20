@@ -18,6 +18,7 @@ class User extends Authenticatable
         'usr_name',
         'usr_email',
         'usr_password',
+        'usr_role',
         'usr_remember_token',
         'usr_token'
     ];

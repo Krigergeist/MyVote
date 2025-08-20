@@ -15,14 +15,20 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('usr_email', 'password');
+        $credentials = [
+            'usr_email'    => $request->usr_email,
+            'usr_password' => $request->usr_password,
+        ];
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('/');
+        if (\Auth::attempt([
+            'usr_email' => $credentials['usr_email'],
+            'password'  => $credentials['usr_password']
+        ])) {
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
-            'usr_email' => 'Email atau password salah',
+            'usr_email' => 'Email atau password salah.',
         ]);
     }
 

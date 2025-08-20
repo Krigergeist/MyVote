@@ -20,25 +20,27 @@ class DatabaseSeeder extends Seeder
                 'usr_id' => 1,
                 'usr_name' => 'Admin Utama',
                 'usr_email' => 'admin@example.com',
-                'usr_email_verified_at' => $now,
                 'usr_password' => Hash::make('password'),
-                'usr_status' => 1,
-                'usr_created_at' => $now,
-                'usr_sys_note' => '1(baik)',
+                'usr_role' => 'admin',
             ],
             [
                 'usr_id' => 2,
                 'usr_name' => 'Petugas 1',
                 'usr_email' => 'petugas@example.com',
                 'usr_password' => Hash::make('password'),
-                'usr_status' => 1,
-                'usr_created_by' => 1,
-                'usr_created_at' => $now,
+                'usr_role' => 'admin',
+            ],
+            [
+                'usr_id' => 3,
+                'usr_name' => 'asnan',
+                'usr_email' => 'asnan@example.com',
+                'usr_password' => Hash::make('ainux11111'),
+                'usr_role' => 'admin',
             ],
         ]);
 
         // TEACHER
-        DB::table('teacher')->insert([
+        DB::table('teachers')->insert([
             [
                 'tcr_id' => 1,
                 'tcr_name' => 'Guru A',
@@ -54,7 +56,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // STUDENT
-        DB::table('student')->insert([
+        DB::table('students')->insert([
             [
                 'std_id' => 1,
                 'std_name' => 'Siswa 1',

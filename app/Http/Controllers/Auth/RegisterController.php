@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -97,18 +98,31 @@ class RegisterController extends Controller
             'usr_name'     => 'required|string|max:255',
             'usr_email'    => 'required|email|unique:users,usr_email',
             'usr_password' => 'required|string|min:6',
-            'usr_role'     => 'required|in:user,admin',
+        ], [
+            'usr_email.unique' => 'Email telah digunakan, silakan gunakan email lain.'
         ]);
 
-        $user = \App\Models\User::create([
+        $siswa = Siswa::create([
             'usr_name'     => $request->usr_name,
             'usr_email'    => $request->usr_email,
-            'usr_password' => \Hash::make($request->usr_password),
-            'usr_role'     => $request->usr_role,
+            'usr_password' => Hash::make($request->usr_password),
+            'usr_role'     => 'student', // default role
         ]);
 
-        auth()->login($user);
+        // Simulasi proses verifikasi, arahkan ke halaman verifikasi
+        return redirect()->route('verify')->with('email', $siswa->usr_email);
+    }
 
-        return redirect()->route('dashboard');
+    // Tambahkan method untuk menampilkan halaman verifikasi
+    public function verify()
+    {
+        return view('auth.verify');
+    }
+
+    // Tambahkan method untuk proses verifikasi (misal tombol di verify.blade)
+    public function processVerify(Request $request)
+    {
+        // Simulasi verifikasi berhasil, arahkan ke login
+        return redirect()->route('login')->with('success', 'Verifikasi berhasil, silakan login.');
     }
 }

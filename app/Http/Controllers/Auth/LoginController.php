@@ -13,18 +13,25 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    public function username()
+{
+    return 'usr_email';
+}
+
     public function login(Request $request)
     {
         $credentials = [
             'usr_email'    => $request->usr_email,
-            'usr_password' => $request->usr_password,
+            'password'     => $request->usr_password,
         ];
 
-        if (\Auth::attempt([
-            'usr_email' => $credentials['usr_email'],
-            'password'  => $credentials['usr_password']
-        ])) {
-            return redirect()->route('dashboard');
+        if (\Auth::attempt(['usr_email' => $credentials['usr_email'], 'password' => $credentials['password']])) {
+            $user = \Auth::user();
+            if ($user->usr_role === 'student') {
+                return redirect()->route('vote.show', ['id' => 1]);
+            } elseif ($user->usr_role === 'student_affairs') {
+                return redirect()->route('dashboard');
+            }
         }
 
         return back()->withErrors([

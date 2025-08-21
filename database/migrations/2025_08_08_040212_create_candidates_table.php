@@ -12,10 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('candidates', function (Blueprint $table) {
-            $table->bigIncrements('cdt_id'); // BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT
-            $table->string('cdt_name', 255);
-            $table->string('cdt_password', 255);
-            $table->timestamps(); // optional
+            $table->id('cdt_id'); // BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
+            $table->string('cdt_name');
+            $table->string('cdt_password');
+            $table->string('cdt_email')->unique();
+            $table->string('cdt_phone');
+            $table->text('cdt_desc')->nullable();
+            $table->timestamps();
         });
     }
 

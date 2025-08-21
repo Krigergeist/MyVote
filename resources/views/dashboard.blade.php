@@ -12,8 +12,8 @@
     </div>
     <div class="btn-group">
       <a href="edit-candidate.html" class="btn btn-outline-secondary">Edit Candidate</a>
-      <a href="add-candidate.html" class="btn btn-primary">Add Candidate</a>
-      <a href="results.html" class="btn btn-outline-dark">Hasil Voting</a>
+      <a href="{{ route('vote.create', ['id' => 1]) }}" class="btn btn-primary">Add Candidate</a>
+      <a href="results.html" class="btn btn-outline-dark">Hasil Voting</a> 
     </div>
   </div>
   <div class="card">

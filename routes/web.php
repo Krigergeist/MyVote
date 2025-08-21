@@ -49,23 +49,14 @@ Route::post('/register/edit/{id}', [RegisterController::class, 'update'])->name(
 Route::delete('/register/remove/{id}', [RegisterController::class, 'destroy'])->name('register.destroy');
 
 
-// ================== CANDIDATE MANAGEMENT ==================
-Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates.index');
-Route::get('/candidates/add', [CandidateController::class, 'create'])->name('candidates.create');
-Route::post('/candidates/add', [CandidateController::class, 'store'])->name('candidates.store');
-Route::get('/candidates/edit/{id}', [CandidateController::class, 'edit'])->name('candidates.edit');
-Route::post('/candidates/edit/{id}', [CandidateController::class, 'update'])->name('candidates.update');
-Route::delete('/candidates/remove/{id}', [CandidateController::class, 'destroy'])->name('candidates.destroy');
-
-
 // ================== VOTING ==================
 Route::middleware(['auth'])->group(function () {
     // siswa bisa melihat halaman voting dan mengirim suara
     Route::get('/vote/{id}/show', [VotingController::class, 'show'])->name('vote.show');   // GET
-    Route::get('/vote/{id}/vote', [VotingController::class, 'vote'])->name('vote.vote'); // POST
+    Route::get('/vote/{id}/vote', [VotingController::class, 'vote'])->name('vote.vote'); // GET (atau POST kalau pakai form)
 
-    // khusus kesiswaan
-    Route::middleware('role:kesiswaan')->group(function () {
+    // khusus student_affair
+    Route::middleware('role:student_affairs')->group(function () {
         Route::get('/vote/{id}/add', [VotingController::class, 'create'])->name('vote.create');
         Route::post('/vote/{id}/add', [VotingController::class, 'store'])->name('vote.store');
         Route::get('/vote/{id}/edit', [VotingController::class, 'edit'])->name('vote.edit');
@@ -75,18 +66,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-// ================== RESULTS ==================
-Route::get('/results', [ResultController::class, 'index'])->name('results.index');
-
-
-// ================== EMAIL VERIFICATION ==================
-Route::get('email/verify', [VerificationController::class, 'show'])->name('verification.notice');
-Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
-Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
-
-
 // ================== JADWAL PEMILIHAN ==================
-Route::middleware(['auth', 'role:kesiswaan'])->group(function () {
+Route::middleware(['auth', 'role:student_affairs'])->group(function () {
     Route::get('/vote/schedule/add', [VoteScheduleController::class, 'create'])->name('schedule.create');
     Route::post('/vote/schedule/add', [VoteScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/vote/schedule/edit/{id}', [VoteScheduleController::class, 'edit'])->name('schedule.edit');
@@ -96,17 +77,17 @@ Route::middleware(['auth', 'role:kesiswaan'])->group(function () {
 
 
 // ================== KELOLA DATA HASIL ==================
-Route::middleware(['auth', 'role:kesiswaan'])->get(
+Route::middleware(['auth', 'role:student_affair'])->get(
     '/vote/interim-result',
     [ResultController::class, 'interim']
 )->name('results.interim');
 
 
 // ================== LAPORAN ==================
-Route::middleware(['auth', 'role:kesiswaan|osis'])->group(function () {
+Route::middleware(['auth', 'role:student_affair,osis'])->group(function () {
     Route::get('/vote/report-result', [ReportController::class, 'finalResult'])->name('report.final');
 });
-Route::middleware(['auth', 'role:kesiswaan'])->get(
+Route::middleware(['auth', 'role:student_affair'])->get(
     '/vote/absention-result',
     [ReportController::class, 'absention']
 )->name('report.absention');

@@ -30,6 +30,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
+
 // ================== AUTHENTICATION ==================
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -48,6 +49,9 @@ Route::get('/register/edit/{id}', [RegisterController::class, 'edit'])->name('re
 Route::post('/register/edit/{id}', [RegisterController::class, 'update'])->name('register.update');
 Route::delete('/register/remove/{id}', [RegisterController::class, 'destroy'])->name('register.destroy');
 
+// ================== CANDIDATES ==================
+Route::get('/candidates/add', [CandidateController::class, 'create'])->name('candidates.create');
+Route::post('/candidates/add', [CandidateController::class, 'store'])->name('candidates.store');
 
 // ================== VOTING ==================
 Route::middleware(['auth'])->group(function () {
@@ -56,13 +60,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/vote/{id}/vote', [VotingController::class, 'vote'])->name('vote.vote'); // GET (atau POST kalau pakai form)
 
     // khusus student_affair
-    Route::middleware('role:student_affairs')->group(function () {
-        Route::get('/vote/{id}/add', [VotingController::class, 'create'])->name('vote.create');
-        Route::post('/vote/{id}/add', [VotingController::class, 'store'])->name('vote.store');
-        Route::get('/vote/{id}/edit', [VotingController::class, 'edit'])->name('vote.edit');
-        Route::post('/vote/{id}/edit', [VotingController::class, 'update'])->name('vote.update');
-        Route::delete('/vote/{id}/remove', [VotingController::class, 'destroy'])->name('vote.destroy');
-    });
+    Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates.index');
+
+    Route::get('vote/{id}/add', [CandidateController::class, 'create'])->name('vote.add');
+    Route::post('vote/{id}/add', [CandidateController::class, 'store'])->name('vote.store');
+
+    Route::get('vote/{id}/edit', [CandidateController::class, 'edit'])->name('vote.edit');
+    Route::put('vote/{id}/edit', [CandidateController::class, 'update'])->name('vote.update');
+
+    Route::get('vote/{id}/remove', [CandidateController::class, 'remove'])->name('vote.remove');
+    Route::delete('vote/{id}/remove', [CandidateController::class, 'destroy'])->name('vote.destroy');
 });
 
 

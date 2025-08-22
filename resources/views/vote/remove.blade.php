@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="height: 60vh;">
   <h2>Remove Candidate</h2>
   <p>Yakin ingin menghapus kandidat <strong>{{ $candidate->cdt_name }}</strong>?</p>
   <form method="POST" action="{{ route('vote.destroy', $candidate->cdt_id) }}">

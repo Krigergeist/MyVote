@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="height: 60vh;">
   <h2>Edit Candidate</h2>
   <form method="POST" action="{{ route('vote.update', $candidate->cdt_id) }}" enctype="multipart/form-data">
     @csrf

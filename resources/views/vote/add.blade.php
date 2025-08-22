@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="height: 60vh;">
   <h2>Add Candidate</h2>
 
   {{-- tampilkan pesan error validasi --}}

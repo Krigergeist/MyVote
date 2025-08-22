@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-4">
+<div class="container my-4" style="height: 60vh;">
   <div class="row">
     <div class="col-md-3 position-relative">
       <div class="card p-3 sidebar sidebar-sticky">

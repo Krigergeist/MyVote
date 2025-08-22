@@ -4,6 +4,25 @@
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
+
+      {{-- Tampilkan error login --}}
+      @if(session('error'))
+        <div class="alert alert-danger">
+          {{ session('error') }}
+        </div>
+      @endif
+
+      {{-- Tampilkan validasi error --}}
+      @if($errors->any())
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            @foreach($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+
       <div class="card p-4 shadow-soft">
         <h3 class="mb-3 text-center">Login</h3>
         <form method="POST" action="{{ route('login') }}">
@@ -18,7 +37,9 @@
           </div>
           <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
-        <p class="mt-3 text-center">Belum punya akun? <a href="{{ route('register.add') }}">Register</a></p>
+        <p class="mt-3 text-center">
+          Belum punya akun? <a href="{{ route('register.add') }}">Register</a>
+        </p>
       </div>
     </div>
   </div>

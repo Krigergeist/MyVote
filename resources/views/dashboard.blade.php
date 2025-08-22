@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-4 container-narrow">
+<div class="container my-4 container-narrow" style="height: 60vh;">
   <h2 class="text-center mb-4 fw-bold">Manage Candidates</h2>
 
   <div class="mb-3 text-end">
@@ -25,7 +25,7 @@
           @foreach($candidates as $candidate)
           <tr>
             <td>
-              @if($candidate->cdt_photo && file_exists(public_path('storage/'.$candidate->cdt_photo)))
+              @if($candidate->cdt_photo && Storage::disk('public')->exists($candidate->cdt_photo))
                 <img src="{{ asset('storage/'.$candidate->cdt_photo) }}" alt="photo" class="rounded" width="50">
               @else
                 <img src="{{ asset('img/default.png') }}" alt="photo" class="rounded" width="50">

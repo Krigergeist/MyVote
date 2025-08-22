@@ -22,7 +22,7 @@
 <body style=" zoom: 150%;">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="index.html">MyVote</a>
+    <a class="navbar-brand fw-bold" href="{{ route('home') }}">MyVote</a>
     <div class="d-flex">
       <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
       <a href="{{ route('register') }}" class="btn btn-warning">Register</a>

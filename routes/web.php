@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResultController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\VoteScheduleController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\HomeController;
+
 
 // ================== Home ==================
 
@@ -48,6 +50,21 @@ Route::post('/verify', [RegisterController::class, 'processVerify'])->name('veri
 Route::get('/register/edit/{id}', [RegisterController::class, 'edit'])->name('register.edit');
 Route::post('/register/edit/{id}', [RegisterController::class, 'update'])->name('register.update');
 Route::delete('/register/remove/{id}', [RegisterController::class, 'destroy'])->name('register.destroy');
+
+// ================== ACCOUNT ==================
+
+Route::middleware(['auth'])->group(function () {
+    Route::middleware('role:student_affairs')->group(function () {
+        Route::get('/manage/account', [AccountController::class, 'index'])->name('account.manage');
+        Route::get('/account/add', [AccountController::class, 'create'])->name('account.add');
+        Route::post('/account/store', [AccountController::class, 'store'])->name('account.store');
+
+        Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
+        Route::put('/account/update/{id}', [AccountController::class, 'update'])->name('account.update');
+        Route::delete('/account/remove/{id}', [AccountController::class, 'destroy'])->name('account.remove');
+
+    });
+});
 
 // ================== CANDIDATES ==================
 Route::get('/candidates/add', [CandidateController::class, 'create'])->name('candidates.create');

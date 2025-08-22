@@ -3,7 +3,7 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<div class="container my-4">
+<div class="container my-4" style="height: 60vh;">
   <section class="hero shadow-soft">
     <div class="row align-items-center g-4">
       <div class="col-lg-7">

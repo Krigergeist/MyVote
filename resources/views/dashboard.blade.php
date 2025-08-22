@@ -4,13 +4,25 @@
 <div class="container my-4 container-narrow" style="height: 60vh;">
   <h2 class="text-center mb-4 fw-bold">Manage Candidates</h2>
 
-  <div class="mb-3 text-end">
-    <a href="{{ route('vote.add', ['id' => 1]) }}" class="btn btn-primary">Add Candidate</a>
+  {{-- Baris Add Candidate + Search --}}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    {{-- Search bar di kiri --}}
+    <div class="flex-grow-1 me-3">
+      <div class="input-group">
+        <span class="input-group-text">🔎</span>
+        <input id="searchCandidate" type="text" class="form-control" placeholder="Search name, email, phone...">
+      </div>
+    </div>
+
+    {{-- Tombol Add Candidate di kanan --}}
+    <div>
+      <a href="{{ route('vote.add', ['id' => 1]) }}" class="btn btn-primary">Add Candidate</a>
+    </div>
   </div>
 
   <div class="card">
     <div class="table-responsive">
-      <table class="table align-middle mb-0">
+      <table class="table align-middle mb-0" id="candidateTable">
         <thead class="table-light">
           <tr>
             <th>Photo</th>
@@ -37,7 +49,8 @@
             <td>{{ $candidate->cdt_desc }}</td>
             <td class="text-end">
               <a href="{{ route('vote.edit', $candidate->cdt_id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
-              <a href="{{ route('vote.remove', $candidate->cdt_id) }}" class="btn btn-sm btn-outline-danger">Remove</a>
+              <a href="{{ route('vote.remove', $candidate->cdt_id) }}" class="btn btn-sm btn-outline-danger"
+                 onclick="return confirm('Yakin ingin menghapus kandidat {{ $candidate->cdt_name }} ?')">Remove</a>
             </td>
           </tr>
           @endforeach
@@ -46,4 +59,16 @@
     </div>
   </div>
 </div>
+
+{{-- Script pencarian client-side --}}
+<script>
+  document.getElementById("searchCandidate").addEventListener("keyup", function() {
+    let filter = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#candidateTable tbody tr");
+    rows.forEach(row => {
+      let text = row.innerText.toLowerCase();
+      row.style.display = text.includes(filter) ? "" : "none";
+    });
+  });
+</script>
 @endsection

@@ -1,10 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-4">
+<div class="container my-4" style="height: 60vh;">
   <h2 class="text-center mb-4 fw-bold">Edit Account</h2>
-  <form method="POST" action="{{ route('account.update', $account->id) }}">
+  {{-- Tampilkan error login --}}
+        @if(session('error'))
+        <div class="alert alert-danger">
+          {{ session('error') }}
+        </div>
+        @endif
+
+        {{-- Tampilkan validasi error --}}
+        @if($errors->any())
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            @foreach($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+         @endif
+  <form method="POST" action="{{ route('account.update', $account->usr_id) }}">
     @csrf
+    @method('PUT')
+    
     <div class="mb-3">
       <label>Name</label>
       <input type="text" name="usr_name" class="form-control" value="{{ $account->usr_name }}" required>
@@ -25,6 +44,7 @@
       </select>
     </div>
     <button type="submit" class="btn btn-success">Update</button>
-  </form>
+</form>
+
 </div>
 @endsection

@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="container my-5" style="height: 60vh;">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
+  
 
       {{-- Tampilkan error login --}}
       @if(session('error'))
@@ -23,8 +22,12 @@
         </div>
       @endif
 
-      <div class="card p-4 shadow-soft">
+<div class="row justify-content-center">
+  <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+    <div class="card shadow-lg border-0 rounded-4 animate__animated animate__fadeInUp">
+      <div class="card-body p-4 p-md-5">
         <h3 class="mb-3 text-center">Login</h3>
+        <p class="text-center text-muted mb-4">Masuk untuk melanjutkan</p>
         <form method="POST" action="{{ route('login') }}">
           @csrf
           <div class="mb-3">
@@ -42,6 +45,7 @@
         </p>
       </div>
     </div>
-  </div>
-</div>
-@endsection
+      </div>
+    </div>
+    </div>
+

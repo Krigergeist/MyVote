@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AccountController;
@@ -19,10 +20,10 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/', function () {
-    return view('home'); // halaman depan
+    return view('landing'); 
 });
 
-Route::get('/home', [HomeController::class, 'index'])->name('home'); // halaman setelah login
+Route::get('/landing', [HomeController::class, 'index'])->name('home'); 
 
 // ================== Home ==================
 

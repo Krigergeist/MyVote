@@ -1,0 +1,60 @@
+/* Global page transition */
+.page {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .25s ease, transform .25s ease;
+}
+
+.page.page-enter-active {
+    opacity: 1;
+    transform: none;
+}
+
+.page-leave {
+    opacity: 0 !important;
+    transform: translateY(8px) !important;
+}
+
+/* Buttons lift effect */
+.lift {
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .15);
+}
+
+/* Stat cards */
+.stat-card {
+    background: linear-gradient(180deg, #ffffff, #f8f9fa);
+}
+
+/* Fancy landing stars background */
+.stars {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, .15), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(255, 255, 255, .12), transparent 30%),
+        radial-gradient(circle at 10% 80%, rgba(255, 255, 255, .1), transparent 30%),
+        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, .1), transparent 30%),
+        linear-gradient(120deg, #f8fbff, #eef3ff);
+    animation: twinkle 6s linear infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        filter: brightness(1);
+    }
+
+    to {
+        filter: brightness(1.2);
+    }
+}
+
+/* Offcanvas width on desktop */
+@media (min-width: 992px) {
+    .offcanvas-start {
+        width: 320px;
+    }
+}

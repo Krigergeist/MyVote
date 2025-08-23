@@ -1,65 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>MyVote</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    
-    <style>
-      footer.footer-black {
-        background: #000;
-        color: #fff;
-      }
-      footer.footer-black a {
-        color: #fff;
-        text-decoration: none;
-      }
-      footer .bi {
-        vertical-align: -0.125em;
-      }
-    </style>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teagle • MyVote</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      scroll-behavior: smooth;
+    }
+    .hero {
+      background: url('assets/teagle.png') center/cover no-repeat;
+      height: 100vh;
+      color: white;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .feature-icon {
+      font-size: 2rem;
+      color: #0d6efd;
+    }
+    footer {
+      background: #0d0d0d;
+      color: #bbb;
+    }
+    footer a { color: #fff; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+      .footer {
+    background: #0d0d0d;
+    color: #bbb;
+  }
+  .footer h5, .footer h6 {
+    color: #fff;
+  }
+  .footer a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer a:hover {
+    color: #0d6efd;
+  }
+  .footer .social {
+    font-size: 1.3rem;
+    color: #bbb;
+  }
+  .footer .social:hover {
+    color: #0d6efd;
+  }
+  .footer {
+    background: #0d0d0d;
+    color: #fff;
+  }
+  .footer h5, 
+  .footer h6,
+  .footer p,
+  .footer a {
+    color: #fff !important;
+  }
+  .footer a:hover {
+    color: #0d6efd !important;
+  }
+  .footer .social {
+    font-size: 1.3rem;
+    color: #fff !important;
+  }
+  .footer .social:hover {
+    color: #0d6efd !important;
+  }
+  </style>
 </head>
-<body style=" zoom: 150%;">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="{{ route('home') }}">MyVote</a>
-    <div class="d-flex">
-      <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
-      <a href="{{ route('register') }}" class="btn btn-warning">Register</a>
-    </div>
-  </div>
-</nav>
+<body>
 
 <div class="container mt-4" >
     @yield('content')
 </div>
-
-<footer class="footer-black pt-5 pb-3">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 mb-3">
-        <h5 class="text-white">MyVote</h5>
-        <p class="mb-0">Sistem pemilihan kandidat online yang aman, cepat, dan transparan.</p>
-      </div>
-      <div class="col-md-4 mb-3">
-        <h5 class="text-white">Contact Us</h5>
-        <p class="mb-1">Jl. Katapang Andir No.Km 2, Bandung</p>
-        <p class="mb-1">support@myvote.com</p>
-        <p class="mb-0">+62 812-3456-7890</p>
-      </div>
-      <div class="col-md-4 mb-3">
-        <h5 class="text-white">Follow Us</h5>
-        <a href="#" class="me-3 text-white">Facebook</a>
-        <a href="#" class="me-3 text-white">Twitter</a>
-        <a href="#" class="text-white">Instagram</a>
-      </div>
-    </div>
-    <hr class="border-secondary">
-    <div class="text-center">
-      <small>© 2025 MyVote. All Rights Reserved.</small>
-    </div>
-  </div>
-</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

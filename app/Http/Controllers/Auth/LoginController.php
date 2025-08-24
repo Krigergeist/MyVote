@@ -43,9 +43,9 @@ class LoginController extends Controller
 
             // Redirect berdasarkan role
             if ($user->usr_role === 'student') {
-                return redirect()->route('vote.show', ['id' => 1]);
+                return redirect()->route('dashboard.user', ['id' => 1]);
             } elseif ($user->usr_role === 'student_affairs') {
-                return redirect()->route('dashboard');
+                return redirect()->route('dashboard.admin');
             }
 
             // Default kalau role tidak dikenali

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -121,8 +120,8 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        // SCHEDULES
-        DB::table('schedules')->insert([
+        // SCEDULES
+        DB::table('scedules')->insert([
             [
                 'scd_id' => 1,
                 'scd_name' => 'Jadwal Pemilihan OSIS',

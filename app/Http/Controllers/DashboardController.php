@@ -10,6 +10,6 @@ class DashboardController extends Controller
     public function index()
     {
         $candidates = Candidate::all();
-        return view('dashboard', compact('candidates'));
+        return view('dashboard.admin.home', compact('dashboard.admin'));
     }
 }

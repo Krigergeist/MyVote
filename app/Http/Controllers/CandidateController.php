@@ -12,7 +12,7 @@ class CandidateController extends Controller
     public function index()
 {
     $candidates = Candidate::all();   // ambil semua kandidat
-    return view('dashboard', compact('candidates'));
+    return view('manage.candidate', compact('candidates'));
 }
 
     // Halaman tambah kandidat

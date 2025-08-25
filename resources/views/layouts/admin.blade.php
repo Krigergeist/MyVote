@@ -37,7 +37,7 @@
         <div class="list-group-item">
           <div class="fw-semibold mb-2">Manage</div>
           <div class="d-grid gap-2">
-            <a href="{{ route('candidates.manage') }}" class="btn btn-outline-dark btn-sm">• Kandidat</a>
+            <a href="{{ route('candidate.index') }}" class="btn btn-outline-dark btn-sm">• Kandidat</a>
             <a href="{{ route('schedule.manage') }}" class="btn btn-outline-dark btn-sm">• Jadwal</a>
             <a href="{{ route('account.manage') }}" class="btn btn-outline-dark btn-sm">• Akun</a>
           </div>

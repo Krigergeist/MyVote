@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\SceduleController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\VotingController;
@@ -36,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard/admin/home', [AdminController::class, 'index'])->name('dashboard.admin');
 
     });
-    Route::middleware('role:student')->group(function () {
+    Route::middleware('role:student,student_affairs')->group(function () {
         Route::get('/dashboard/user/home', [UserController::class, 'index'])->name('dashboard.user');
     });
 });
@@ -75,46 +75,46 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ================== CANDIDATES ==================
+Route::middleware(['auth', 'role:student_affairs'])->group(function (): void {
+    Route::get('/manage/candidate', [CandidateController::class, 'index'])->name('candidate.index');
+    Route::get('/candidate/create', [CandidateController::class, 'create'])->name('candidate.create');
+    Route::post('/candidate/store', [CandidateController::class, 'store'])->name('candidate.store');
 
-Route::get('/manage/candidate', [CandidateController::class, 'index'])->name('candidates.manage');
-Route::get('/candidates/add', [CandidateController::class, 'create'])->name('candidates.create');
-Route::post('/candidates/add', [CandidateController::class, 'store'])->name('candidates.store');
+    Route::get('/candidate/{id}/edit', [CandidateController::class, 'edit'])->name('candidate.edit');
+    Route::put('/candidate/{id}', [CandidateController::class, 'update'])->name('candidate.update');
+    Route::delete('/candidate/{id}', [CandidateController::class, 'destroy'])->name('candidate.destroy');
+});
 
 // ================== SCHEDULE ==================
 
-Route::middleware(['auth', 'role:student_affairs'])->group(function () {
-    Route::get('/manage/schedule', [SceduleController::class, 'index'])->name('schedule.manage');
+Route::middleware(['auth'])->group(function () {
+    Route::middleware('role:student_affairs')->group(function () {
+        Route::get('/manage/schedule', [ScheduleController::class, 'index'])->name('schedule.manage');
 
-    Route::get('/schedule/add', [SceduleController::class, 'create'])->name('schedule.create');
-    Route::post('/schedule/store', [SceduleController::class, 'store'])->name('schedule.store');
+        Route::get('/schedule/add', [ScheduleController::class, 'create'])->name('schedule.create');
+        Route::post('/schedule/add', [ScheduleController::class, 'store'])->name('schedule.store');
 
-    Route::get('/schedule/edit/{id}', [SceduleController::class, 'edit'])->name('schedule.edit');
-    Route::put('/schedule/update/{id}', [SceduleController::class, 'update'])->name('schedule.update');
+        Route::get('/schedule/edit/{id}', [ScheduleController::class, 'edit'])->name('schedule.edit');
+        Route::put('/schedule/update/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
 
-    Route::delete('/schedule/remove/{id}', [SceduleController::class, 'destroy'])->name('schedule.remove');
+        Route::delete('/schedule/remove/{id}', [ScheduleController::class, 'destroy'])->name('schedule.remove');
+    });
+});
+
+// ================== RESULT ==================
+
+Route::prefix('result')->group(function () {
+    Route::post('/vote', [ResultController::class, 'store'])->name('result.store');
 });
 
 
-
-
-// ================== VOTING ==================
+// ================== VOTE ==================
 Route::middleware(['auth', 'role:student,student_affairs'])->group(function () {
-    // siswa bisa melihat halaman voting dan mengirim suara
-    Route::get('/vote/{id}/show', [VotingController::class, 'show'])->name('vote.show');   // GET
-    Route::get('/vote/{id}/vote', [VotingController::class, 'vote'])->name('vote.vote'); // GET (atau POST kalau pakai form)
-
-    // khusus student_affair
-    Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates.index');
-
-    Route::get('vote/{id}/add', [CandidateController::class, 'create'])->name('vote.add');
-    Route::post('vote/{id}/add', [CandidateController::class, 'store'])->name('vote.store');
-
-    Route::get('vote/{id}/edit', [CandidateController::class, 'edit'])->name('vote.edit');
-    Route::put('vote/{id}/edit', [CandidateController::class, 'update'])->name('vote.update');
-
-    Route::get('vote/{id}/remove', [CandidateController::class, 'remove'])->name('vote.remove');
-    Route::delete('vote/{id}/remove', [CandidateController::class, 'destroy'])->name('vote.destroy');
+    Route::get('/vote', [VotingController::class, 'index'])->name('vote.index');
+    Route::post('/vote/{id}/vote', [VotingController::class, 'vote'])->name('vote.vote');
 });
+
+
 
 // ================== KELOLA DATA HASIL ==================
 Route::middleware(['auth', 'role:student_affairs'])->get(

@@ -2,7 +2,6 @@
 
 @section('content')
 <main class="container py-4">
-
     <h3 class="mb-3" data-aos="fade-up">Pilih Kandidat</h3>
 
     <div class="row g-3">
@@ -16,12 +15,11 @@
                         <p class="card-text small text-muted">{{ $candidate->cdt_desc ?? 'Visi belum tersedia' }}</p>
 
                         <div class="mt-auto d-grid">
-                            @if($userHasVoted ?? false)
+                            @if($userHasVoted)
                                 <button type="button" class="btn btn-secondary" disabled>Sudah Memilih</button>
                             @else
-                                <form method="POST" action="{{ route('result.store') }}">
+                                <form method="POST" action="{{ route('vote.vote', $candidate->cdt_id) }}">
                                     @csrf
-                                    <input type="hidden" name="cdt_id" value="{{ $candidate->cdt_id }}">
                                     <button type="submit" class="btn btn-primary">Pilih</button>
                                 </form>
                             @endif

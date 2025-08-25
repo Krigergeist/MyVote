@@ -38,6 +38,6 @@ class User extends Authenticatable
     // Laravel defaultnya pakai "email", jadi kita override
     public function getAuthIdentifierName()
     {
-        return 'usr_email';
+        return 'usr_id';
     }
 }

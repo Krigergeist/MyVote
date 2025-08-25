@@ -14,10 +14,10 @@
       </div>
     </div>
 
-    {{-- Tombol Add Candidate di kanan --}}
-    <div>
-      <a href="{{ route('vote.add', ['id' => 1]) }}" class="btn btn-primary">Add Candidate</a>
-    </div>
+    {{-- Tombol Add Candidate --}}
+<div>
+  <a href="{{ route('candidate.create') }}" class="btn btn-primary">Add Candidate</a>
+</div>
   </div>
 
   <div class="card">
@@ -48,9 +48,14 @@
             <td>{{ $candidate->cdt_phone }}</td>
             <td>{{ $candidate->cdt_desc }}</td>
             <td class="text-end">
-              <a href="{{ route('vote.edit', $candidate->cdt_id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
-              <a href="{{ route('vote.remove', $candidate->cdt_id) }}" class="btn btn-sm btn-outline-danger"
-                 onclick="return confirm('Yakin ingin menghapus kandidat {{ $candidate->cdt_name }} ?')">Remove</a>
+              <a href="{{ route('candidate.edit', $candidate->cdt_id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+
+              <form action="{{ route('candidate.destroy', $candidate->cdt_id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-sm btn-outline-danger"
+                        onclick="return confirm('Yakin ingin menghapus kandidat {{ $candidate->cdt_name }} ?')">Remove</button>
+              </form>
             </td>
           </tr>
           @endforeach

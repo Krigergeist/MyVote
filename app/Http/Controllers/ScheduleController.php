@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Scedule;
 use Illuminate\Http\Request;
 
-class SceduleController extends Controller
+class ScheduleController extends Controller
 {
     // Halaman utama
     public function index()

@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container" style="height: 60vh;">
   <h2>Edit Candidate</h2>
-  <form method="POST" action="{{ route('vote.update', $candidate->cdt_id) }}" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
+  <form method="POST" action="{{ route('candidate.update', $candidate->cdt_id) }}" enctype="multipart/form-data">
+  @csrf
+  @method('PUT')
     <div class="mb-3">
       <label>Name</label>
       <input type="text" name="name" class="form-control" value="{{ $candidate->cdt_name }}" required>

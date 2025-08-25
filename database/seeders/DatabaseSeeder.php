@@ -15,131 +15,31 @@ class DatabaseSeeder extends Seeder
 
         // USERS
         DB::table('users')->insert([
-            [
-                'usr_id' => 1,
-                'usr_name' => 'Admin Utama',
-                'usr_email' => 'admin@example.com',
-                'usr_password' => Hash::make('password'),
-                'usr_role' => 'admin',
-            ],
-            [
-                'usr_id' => 2,
-                'usr_name' => 'Petugas 1',
-                'usr_email' => 'petugas@example.com',
-                'usr_password' => Hash::make('password'),
-                'usr_role' => 'admin',
-            ],
-            [
-                'usr_id' => 3,
-                'usr_name' => 'asnan',
-                'usr_email' => 'asnan@example.com',
-                'usr_password' => Hash::make('ainux11111'),
-                'usr_role' => 'admin',
-            ],
-        ]);
-
-        // TEACHER
-        DB::table('teachers')->insert([
-            [
-                'tcr_id' => 1,
-                'tcr_name' => 'Guru A',
-                'tcr_password' => Hash::make('123456'),
-                'tcr_created_at' => $now,
-            ],
-            [
-                'tcr_id' => 2,
-                'tcr_name' => 'Guru B',
-                'tcr_password' => Hash::make('123456'),
-                'tcr_created_at' => $now,
-            ],
-        ]);
-
-        // STUDENT
-        DB::table('students')->insert([
-            [
-                'std_id' => 1,
-                'std_name' => 'Siswa 1',
-                'std_password' => Hash::make('123456'),
-                'std_created_at' => $now,
-            ],
-            [
-                'std_id' => 2,
-                'std_name' => 'Siswa 2',
-                'std_password' => Hash::make('123456'),
-                'std_created_at' => $now,
-            ],
+            ['usr_id' => 1, 'usr_name' => 'Admin Utama', 'usr_email' => 'admin@example.com', 'usr_password' => Hash::make('password'), 'usr_role' => 'student_affairs'],
+            ['usr_id' => 2, 'usr_name' => 'Petugas 1', 'usr_email' => 'petugas@example.com', 'usr_password' => Hash::make('password'), 'usr_role' => 'student_affairs'],
+            ['usr_id' => 3, 'usr_name' => 'uno', 'usr_email' => 'uno@gmail.com', 'usr_password' => Hash::make('11111111'), 'usr_role' => 'student_affairs'],
+            ['usr_id' => 4, 'usr_name' => 'Asnan', 'usr_email' => 'asnan@gmail.com', 'usr_password' => Hash::make('11111111'), 'usr_role' => 'student'],
         ]);
 
         // CANDIDATE
-        DB::table('candidate')->insert([
-            [
-                'cdt_id' => 1,
-                'cdt_name' => 'Calon Ketua 1',
-                'cdt_password' => Hash::make('123456'),
-                'cdt_created_at' => $now,
-            ],
-            [
-                'cdt_id' => 2,
-                'cdt_name' => 'Calon Ketua 2',
-                'cdt_password' => Hash::make('123456'),
-                'cdt_created_at' => $now,
-            ],
+        DB::table('candidates')->insert([
+            ['cdt_id' => 1, 'cdt_name' => 'Calon Ketua 1','cdt_email' => 'calon1@example.com','cdt_phone' => '08123456789', 'cdt_password' => Hash::make('123456')],
+            ['cdt_id' => 2, 'cdt_name' => 'Calon Ketua 2', 'cdt_email' => 'calon2@example.com', 'cdt_phone' => '08123456789', 'cdt_password' => Hash::make('123456')],
         ]);
 
-        // RECORD
-        DB::table('record')->insert([
-            [
-                'rcd_id' => 1,
-                'rcd_name' => 'Pemilihan OSIS',
-                'rcd_created_by' => 1,
-                'rcd_created_at' => $now,
-            ],
-            [
-                'rcd_id' => 2,
-                'rcd_name' => 'Pemilihan Ketua Kelas',
-                'rcd_created_by' => 2,
-                'rcd_created_at' => $now,
-            ],
-        ]);
-
-        // RESULTS
-        DB::table('results')->insert([
-            [
-                'rst_id' => 1,
-                'rst_siswa_id' => 1,
-                'rst_nama' => 1,
-                'rst_created_by' => 1,
-                'rst_created_at' => $now,
-            ],
-            [
-                'rst_id' => 2,
-                'rst_siswa_id' => 2,
-                'rst_nama' => 2,
-                'rst_created_by' => 2,
-                'rst_created_at' => $now,
-            ],
-        ]);
-
-        // SCEDULES
         DB::table('scedules')->insert([
-            [
-                'scd_id' => 1,
-                'scd_name' => 'Jadwal Pemilihan OSIS',
-                'scd_deskripsi' => 'Pemilihan ketua OSIS tahun ajaran baru',
-                'scd_tanggal_mulai' => $now,
-                'scd_tanggal_selesai' => $now->copy()->addDays(3),
-                'scd_created_at' => time(),
-                'scd_updated_at' => time(),
-            ],
-            [
-                'scd_id' => 2,
-                'scd_name' => 'Jadwal Pemilihan Ketua Kelas',
-                'scd_deskripsi' => 'Pemilihan ketua kelas semester ini',
-                'scd_tanggal_mulai' => $now,
-                'scd_tanggal_selesai' => $now->copy()->addDays(2),
-                'scd_created_at' => time(),
-                'scd_updated_at' => time(),
-            ],
+            ['scd_id' => 1, 'scd_name' => 'pemilihan ketua OSIS', 'scd_tanggal_mulai' => $now, 'scd_tanggal_selesai' => $now->copy()->addDays(2)],
+        ]);
+
+        // RECORD (dummy voting session)
+        DB::table('records')->insert([
+            ['rcd_id' => 1, 'rcd_name' => 'Pemilihan ketua OSIS'],
+        ]);
+
+        // RESULTS (dummy votes)
+        DB::table('results')->insert([
+            ['rst_id' => 1, 'rcd_id' => 1, 'cdt_id' => 1, 'usr_id' => 3, 'created_at' => $now, 'updated_at' => $now],
+            ['rst_id' => 2, 'rcd_id' => 1, 'cdt_id' => 2, 'usr_id' => 3, 'created_at' => $now, 'updated_at' => $now],
         ]);
     }
 }

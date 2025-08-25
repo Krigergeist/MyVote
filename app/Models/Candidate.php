@@ -9,25 +9,53 @@ class Candidate extends Model
 {
     use HasFactory;
 
-    // Nama tabel (opsional, Laravel otomatis pakai plural -> candidates)
+    /**
+     * Nama tabel yang digunakan.
+     * Laravel default-nya sudah "candidates", jadi ini opsional.
+     */
     protected $table = 'candidates';
 
-    // Primary key bukan "id" default
+    /**
+     * Nama primary key.
+     */
     protected $primaryKey = 'cdt_id';
 
-    // Kalau primary key bukan increment int/uuid bisa set ini:
-    public $incrementing = true; 
+    /**
+     * Primary key berupa auto-increment integer.
+     */
+    public $incrementing = true;
 
-    // Kalau bukan integer (misal UUID) baru ubah tipe ke string
+    /**
+     * Tipe data primary key.
+     */
     protected $keyType = 'int';
 
-    // Field yang bisa diisi mass-assignment
+    /**
+     * Field yang boleh diisi secara mass-assignment.
+     */
     protected $fillable = [
-        'cdt_name',
-        'cdt_password',
+        'rcd_id',       // ID dari record pemilihan
+        'cdt_name',     // Nama kandidat
+        'cdt_password', // Jika memang kandidat login sendiri (opsional)
         'cdt_email',
         'cdt_phone',
-        'cdt_desc',
-        'cdt_photo'
+        'cdt_desc',     // Deskripsi/visi/misi
+        'cdt_photo'     // Path foto kandidat
     ];
+
+    /**
+     * Relasi: satu kandidat punya banyak hasil (votes) di tabel results.
+     */
+    public function results()
+    {
+        return $this->hasMany(Result::class, 'cdt_id', 'cdt_id');
+    }
+
+    /**
+     * (Opsional) Relasi ke record (jika tabel records adalah pemilihan)
+     */
+    public function record()
+    {
+        return $this->belongsTo(Record::class, 'rcd_id', 'rcd_id');
+    }
 }

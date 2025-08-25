@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container" style="height: 60vh;">
@@ -23,7 +23,7 @@
     </div>
   @endif
 
-  <form method="POST" action="{{ route('vote.store', $id) }}" enctype="multipart/form-data">
+  <form method="POST" action="{{ route('candidate.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
       <label>Name</label>

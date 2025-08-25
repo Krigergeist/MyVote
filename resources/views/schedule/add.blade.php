@@ -15,12 +15,12 @@
       </div>
     @endif
 
-    <form class="row g-3" action="{{ route('schedule.store') }}" method="POST" data-aos="fade-up">
-      @csrf
-      <div class="col-md-12">
-        <label class="form-label">Nama Jadwal</label>
-        <input type="text" name="scd_name" class="form-control" value="{{ old('scd_name') }}" required>
-      </div>
+    <form method="POST" class="row g-3" action="{{ route('schedule.store') }}" data-aos="fade-up">
+    @csrf
+    <div class="col-md-12">
+      <label class="form-label">Nama Jadwal</label>
+      <input type="text" name="scd_name" class="form-control" value="{{ old('scd_name') }}" required>
+    </div>
 
       <div class="col-md-12">
         <label class="form-label">Deskripsi</label>

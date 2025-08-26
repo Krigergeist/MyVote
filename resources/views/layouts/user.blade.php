@@ -29,7 +29,7 @@
     <div class="offcanvas-body">
       <div class="list-group list-group-flush">
         <a href="{{ route('dashboard.user') }}" class="list-group-item list-group-item-action" data-nav>Home</a>
-        <a href="profile-user.html" class="list-group-item list-group-item-action" data-nav>Profile</a>
+        <!-- <a href="profile-user.html" class="list-group-item list-group-item-action" data-nav>Profile</a> -->
         <a href="{{ route('result.index') }}" class="list-group-item list-group-item-action" data-nav>Lihat Hasil</a>
         <a href="{{ route('vote.index') }}" class="list-group-item list-group-item-action" data-nav>Voting Kandidat</a>
         <a href="{{ route('home') }}" class="list-group-item list-group-item-action text-danger" data-nav>Logout</a>

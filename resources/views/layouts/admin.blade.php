@@ -30,10 +30,10 @@
     </div>
     <div class="offcanvas-body">
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action">Profile</a>
+        <!-- <a href="#" class="list-group-item list-group-item-action">Profile</a> -->
         <a href="{{ route('dashboard.admin') }}" class="list-group-item list-group-item-action">Home</a>
         <a href="#" class="list-group-item list-group-item-action">Voting</a>
-        <a href="#" class="list-group-item list-group-item-action">Results</a>
+        <!-- <a href="#" class="list-group-item list-group-item-action">Results</a> -->
         <div class="list-group-item">
           <div class="fw-semibold mb-2">Manage</div>
           <div class="d-grid gap-2">

@@ -23,7 +23,7 @@
             <p class="mb-1">Mulai: 01 Sep 2025</p>
             <p class="mb-3">Selesai: 03 Sep 2025</p>
             <div class="d-flex gap-2">
-              <a href="results-user.html" class="btn btn-outline-secondary" data-nav>Lihat Hasil</a>
+              <!-- <a href="results-user.html" class="btn btn-outline-secondary" data-nav>Lihat Hasil</a> -->
               <a href="{{ route('vote.index') }}" class="btn btn-outline-primary" data-nav>Lihat Kandidat</a>
             </div>
           </div>

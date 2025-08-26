@@ -16,25 +16,17 @@ use App\Http\Controllers\VoteController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\HomeController;
 
-
 // ================== Home ==================
-
-
 Route::get('/', function () {
     return view('landing'); 
 });
 
 Route::get('/landing', [HomeController::class, 'index'])->name('home'); 
 
-// ================== landing ==================
-
-Route::get('/landing', [HomeController::class, 'index'])->name('landing');
-
 // ================== DASHBOARD ==================
 Route::middleware(['auth'])->group(function () {
     Route::middleware('role:student_affairs')->group(function () {
-        Route::get('/dashboard/admin/home', [AdminController::class, 'index'])->name('dashboard.admin');
-
+        Route::get('/dashboard/admin/home', [ResultController::class, 'votingData'])->name('dashboard.admin');
     });
     Route::middleware('role:student,student_affairs')->group(function () {
         Route::get('/dashboard/user/home', [UserController::class, 'index'])->name('dashboard.user');
@@ -45,7 +37,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
 
 // ================== REGISTRATION ==================
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -60,7 +51,6 @@ Route::post('/register/edit/{id}', [RegisterController::class, 'update'])->name(
 Route::delete('/register/remove/{id}', [RegisterController::class, 'destroy'])->name('register.destroy');
 
 // ================== ACCOUNT ==================
-
 Route::middleware(['auth'])->group(function () {
     Route::middleware('role:student_affairs')->group(function () {
         Route::get('/manage/account', [AccountController::class, 'index'])->name('account.manage');
@@ -70,7 +60,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
         Route::put('/account/update/{id}', [AccountController::class, 'update'])->name('account.update');
         Route::delete('/account/remove/{id}', [AccountController::class, 'destroy'])->name('account.remove');
-
     });
 });
 
@@ -86,7 +75,6 @@ Route::middleware(['auth', 'role:student_affairs'])->group(function (): void {
 });
 
 // ================== SCHEDULE ==================
-
 Route::middleware(['auth'])->group(function () {
     Route::middleware('role:student_affairs')->group(function () {
         Route::get('/manage/schedule', [ScheduleController::class, 'index'])->name('schedule.manage');
@@ -102,26 +90,22 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ================== RESULT ==================
-
 Route::prefix('result')->group(function () {
     Route::post('/vote', [ResultController::class, 'store'])->name('result.store');
 });
-
 
 // ================== VOTE ==================
 Route::middleware(['auth', 'role:student,student_affairs'])->group(function () {
     Route::get('/vote', [VotingController::class, 'index'])->name('vote.index');
     Route::post('/vote/{id}/vote', [VotingController::class, 'vote'])->name('vote.vote');
+    Route::get('/result', [ResultController::class, 'result'])->name('result.index');
 });
-
-
 
 // ================== KELOLA DATA HASIL ==================
 Route::middleware(['auth', 'role:student_affairs'])->get(
     '/vote/interim-result',
     [ResultController::class, 'interim']
 )->name('results.interim');
-
 
 // ================== LAPORAN ==================
 Route::middleware(['auth', 'role:student_affairs,osis'])->group(function () {

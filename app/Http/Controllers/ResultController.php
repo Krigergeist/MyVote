@@ -7,9 +7,42 @@ use App\Models\Result;
 use App\Models\Candidate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB; // Import DB facade
+use App\Models\User; // Import User model
 
 class ResultController extends Controller
 {
+    public function votingData()
+    {
+        // Get votes per candidate with candidate names
+        $votes = Result::join('candidates', 'results.cdt_id', '=', 'candidates.cdt_id')
+            ->select('candidates.cdt_name', DB::raw('count(*) as total_votes'))
+            ->groupBy('candidates.cdt_id', 'candidates.cdt_name')
+            ->get();
+
+        $totalVotes = Result::count();
+        $totalUsers = User::count();
+        $golputCount = $totalUsers - $totalVotes;
+
+        // Prepare data for the chart
+        $chartLabels = $votes->pluck('cdt_name')->toArray();
+        $chartData = $votes->pluck('total_votes')->toArray();
+
+        // Add golput to the chart data if there are abstentions
+        if ($golputCount > 0) {
+            $chartLabels[] = 'Golput';
+            $chartData[] = $golputCount;
+        }
+
+        return view('dashboard.admin.home', [
+            'votes' => $votes,
+            'golputCount' => $golputCount,
+            'kandidatCount' => Candidate::count(),
+            'akunCount' => $totalUsers,
+            'chartLabels' => $chartLabels,
+            'chartData' => $chartData,
+        ]);
+    }
     /**
      * Tampilkan halaman vote
      */
@@ -47,6 +80,25 @@ class ResultController extends Controller
 
 
         return redirect()->route('vote.index')->with('success', 'Suara berhasil disimpan.');
+    }
+
+    /**
+     * Tampilkan hasil voting
+     */
+    public function result()
+    {
+        $candidates = Candidate::all();
+        $results = Result::selectRaw('cdt_id, count(*) as total_votes')
+            ->groupBy('cdt_id')
+            ->get();
+
+        $voteData = [];
+        foreach ($candidates as $candidate) {
+            $voteCount = $results->where('cdt_id', $candidate->cdt_id)->first();
+            $voteData[$candidate->cdt_name] = $voteCount ? $voteCount->total_votes : 0;
+        }
+
+        return view('result', compact('candidates', 'voteData'));
     }
 
 }

@@ -195,10 +195,10 @@
       </div>
       <div class="col-md-4">
         <h6 class="fw-semibold text-white">Contact</h6>
-        <p class="text-muted mb-1">📧 Teagleoff@gmail.com</p>
-        <p class="text-muted mb-1">📞 +62 897 9073 873</p>
+        <p class=" mb-1">📧 Teagleoff@gmail.com</p>
+        <p class=" mb-1">📞 +62 897 9073 873</p>
         <div class="d-flex gap-3 mt-2">
-          <a href="https://www.instagram.com/teagleoff/?utm_source=ig_web_button_share_sheet" class="social"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.instagram.com/teagleoff/?utm_source=ig_web_button_share_sheet" class="social "><i class="bi bi-instagram"></i> Teagleoff</a>
         </div>
       </div>
     </div>

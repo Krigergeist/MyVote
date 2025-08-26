@@ -1,4 +1,10 @@
-@extends('layouts.user')
+@php
+    use Illuminate\Support\Facades\Auth;
+    $user = Auth::user();
+    $isAdmin = $user && $user->usr_role === 'student_affairs';
+@endphp
+
+@extends($isAdmin ? 'layouts.admin' : 'layouts.user')
 
 @section('content')
 <main class="container py-4">
@@ -8,7 +14,7 @@
     <div class="row g-3">
         @foreach($candidates as $index => $candidate)
             <div class="col-12 col-sm-6 col-lg-4" data-aos="zoom-in" data-aos-delay="{{ $index * 50 }}">
-                <div class="card shadow-sm rounded-4 h-100">
+                <div class="card shadow-sm rounded-4 h-100 p-1">
                     <img src="{{ $candidate->cdt_photo ? asset('storage/'.$candidate->cdt_photo) : 'https://picsum.photos/seed/cand'.$index.'/600/400' }}" 
                          class="card-img-top" alt="{{ $candidate->cdt_name }}">
                     <div class="card-body d-flex flex-column">

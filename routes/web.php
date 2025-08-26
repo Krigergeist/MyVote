@@ -15,13 +15,14 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingControlller;
 
 // ================== Home ==================
 Route::get('/', function () {
     return view('landing'); 
 });
 
-Route::get('/landing', [HomeController::class, 'index'])->name('home'); 
+Route::get('/landing', [LandingControlller::class, 'index'])->name('landing');
 
 // ================== DASHBOARD ==================
 Route::middleware(['auth'])->group(function () {

@@ -14,9 +14,10 @@ class VotingController extends Controller
     public function index()
     {
         $candidates = Candidate::all();
+        $hasVoted = Result::where('usr_id', Auth::id())->exists();
         $userHasVoted = Result::where('usr_id', Auth::id())->exists();
 
-        return view('vote.index', compact('candidates', 'userHasVoted'));
+        return view('vote.index', compact('candidates', 'userHasVoted', 'hasVoted'));
     }
 
     // Simpan vote user

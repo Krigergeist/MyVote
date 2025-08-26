@@ -9,7 +9,11 @@
         <div class="card shadow-sm h-100 rounded-4">
           <div class="card-body">
             <h5 class="card-title">Status Voting</h5>
-            <p>Anda belum melakukan voting.</p>
+@if($hasVoted)
+    <p>Anda sudah melakukan voting.</p>
+@else
+    <p>Anda belum melakukan voting.</p>
+@endif
             <a href="{{ route('vote.index') }}" class="btn btn-primary">
   Voting Sekarang
 </a>
@@ -20,8 +24,8 @@
         <div class="card shadow-sm h-100 rounded-4">
           <div class="card-body">
             <h5 class="card-title">Jadwal Voting</h5>
-            <p class="mb-1">Mulai: 01 Sep 2025</p>
-            <p class="mb-3">Selesai: 03 Sep 2025</p>
+            <p class="mb-1">Mulai: {{ $jadwalMulai }}</p>
+            <p class="mb-3">Selesai: {{ $jadwalSelesai }}</p>
             <div class="d-flex gap-2">
               <!-- <a href="results-user.html" class="btn btn-outline-secondary" data-nav>Lihat Hasil</a> -->
               <a href="{{ route('vote.index') }}" class="btn btn-outline-primary" data-nav>Lihat Kandidat</a>

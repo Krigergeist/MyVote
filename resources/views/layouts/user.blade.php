@@ -8,6 +8,17 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+  <style>
+    .card-img-top {
+        padding: 2vh;
+        height: 300px;
+        object-fit: contain;
+        width: 100%;
+    }
+    img {
+        border-image: 2vh;
+    }
+  </style>
 </head>
 <body class="page page-enter">
 
@@ -32,7 +43,7 @@
         <!-- <a href="profile-user.html" class="list-group-item list-group-item-action" data-nav>Profile</a> -->
         <a href="{{ route('result.index') }}" class="list-group-item list-group-item-action" data-nav>Lihat Hasil</a>
         <a href="{{ route('vote.index') }}" class="list-group-item list-group-item-action" data-nav>Voting Kandidat</a>
-        <a href="{{ route('home') }}" class="list-group-item list-group-item-action text-danger" data-nav>Logout</a>
+        <a href="{{ route('logout') }}" class="list-group-item list-group-item-action text-danger" data-nav>Logout</a>
       </div>
     </div>
   </div>
@@ -43,6 +54,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

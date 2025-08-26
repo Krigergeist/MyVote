@@ -1,4 +1,10 @@
-@extends('layouts.user')
+@php
+    use Illuminate\Support\Facades\Auth;
+    $user = Auth::user();
+    $isAdmin = $user && $user->usr_role === 'student_affairs';
+@endphp
+
+@extends($isAdmin ? 'layouts.admin' : 'layouts.user')
 
 @section('content')
 <main class="container py-4">

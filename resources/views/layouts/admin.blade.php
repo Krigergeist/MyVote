@@ -8,6 +8,17 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <style>
+    .card-img-top {
+        padding: 2vh;
+        height: 300px;
+        object-fit: contain;
+        width: 100%;
+    }
+    img {
+        border-image: 2vh;
+    }
+  </style>
 </head>
 <body class="page page-enter">
 
@@ -32,7 +43,7 @@
       <div class="list-group list-group-flush">
         <!-- <a href="#" class="list-group-item list-group-item-action">Profile</a> -->
         <a href="{{ route('dashboard.admin') }}" class="list-group-item list-group-item-action">Home</a>
-        <a href="#" class="list-group-item list-group-item-action">Voting</a>
+        <a href="{{ route('vote.index') }}" class="list-group-item list-group-item-action">Voting</a>
         <!-- <a href="#" class="list-group-item list-group-item-action">Results</a> -->
         <div class="list-group-item">
           <div class="fw-semibold mb-2">Manage</div>

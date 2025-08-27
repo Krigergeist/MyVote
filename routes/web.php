@@ -101,18 +101,3 @@ Route::middleware(['auth', 'role:student,student_affairs'])->group(function () {
     Route::post('/vote/{id}/vote', [VotingController::class, 'vote'])->name('vote.vote');
     Route::get('/result', [ResultController::class, 'result'])->name('result.index');
 });
-
-// ================== KELOLA DATA HASIL ==================
-Route::middleware(['auth', 'role:student_affairs'])->get(
-    '/vote/interim-result',
-    [ResultController::class, 'interim']
-)->name('results.interim');
-
-// ================== LAPORAN ==================
-Route::middleware(['auth', 'role:student_affairs,osis'])->group(function () {
-    Route::get('/vote/report-result', [ReportController::class, 'finalResult'])->name('report.final');
-});
-Route::middleware(['auth', 'role:student_affairs'])->get(
-    '/vote/absention-result',
-    [ReportController::class, 'absention']
-)->name('report.absention');

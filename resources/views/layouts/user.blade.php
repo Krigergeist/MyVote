@@ -43,7 +43,10 @@
         <!-- <a href="profile-user.html" class="list-group-item list-group-item-action" data-nav>Profile</a> -->
         <a href="{{ route('result.index') }}" class="list-group-item list-group-item-action" data-nav>Lihat Hasil</a>
         <a href="{{ route('vote.index') }}" class="list-group-item list-group-item-action" data-nav>Voting Kandidat</a>
-        <a href="{{ route('logout') }}" class="list-group-item list-group-item-action text-danger" data-nav>Logout</a>
+        <form action="{{ route('logout') }}" method="POST" class="d-grid">
+          @csrf
+          <button type="submit" class="list-group-item list-group-item-action text-danger border-0 text-start">Logout</button>
+        </form>
       </div>
     </div>
   </div>

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('records', function (Blueprint $table) {
-            $table->bigIncrements('rcd_id');          // Primary key
-            $table->string('rcd_name');              // Nama event voting
-            $table->text('rcd_desc')->nullable();    // Deskripsi event
-            $table->timestamp('start_at')->nullable(); // Waktu mulai voting
-            $table->timestamp('end_at')->nullable();   // Waktu selesai voting
-            $table->timestamps();                    // created_at & updated_at
+            $table->bigIncrements('rcd_id');         
+            $table->string('rcd_name');              
+            $table->text('rcd_desc')->nullable();    
+            $table->timestamp('start_at')->nullable(); 
+            $table->timestamp('end_at')->nullable();   
+            $table->timestamps();                    
         });
     }
 

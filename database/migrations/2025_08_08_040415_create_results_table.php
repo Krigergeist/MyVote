@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->bigIncrements('rst_id');
-            $table->unsignedBigInteger('rcd_id');   // Record/event voting
-            $table->unsignedBigInteger('cdt_id');   // Kandidat
-            $table->unsignedBigInteger('usr_id');   // User/siswa yang memilih
+            $table->unsignedBigInteger('rcd_id');   
+            $table->unsignedBigInteger('cdt_id');   
+            $table->unsignedBigInteger('usr_id');   
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->foreign('rcd_id')->references('rcd_id')->on('records')->onDelete('cascade');
             $table->foreign('cdt_id')->references('cdt_id')->on('candidates')->onDelete('cascade');
             $table->foreign('usr_id')->references('usr_id')->on('users')->onDelete('cascade');
 
-            $table->unique(['rcd_id','usr_id']); // mencegah siswa vote lebih dari sekali di satu record
+            $table->unique(['rcd_id','usr_id']); 
         });
 
     }

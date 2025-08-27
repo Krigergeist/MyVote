@@ -3,7 +3,7 @@
 @section('content')
 <div class="container my-4" style="height: 60vh;">
   <h2 class="text-center mb-4 fw-bold">Edit Account</h2>
-  {{-- Tampilkan error login --}}
+        {{-- Tampilkan error login --}}
         @if(session('error'))
         <div class="alert alert-danger">
           {{ session('error') }}

@@ -9,14 +9,14 @@
         <div class="card shadow-sm h-100 rounded-4">
           <div class="card-body">
             <h5 class="card-title">Status Voting</h5>
-@if($hasVoted)
-    <p>Anda sudah melakukan voting.</p>
-@else
-    <p>Anda belum melakukan voting.</p>
-@endif
-            <a href="{{ route('vote.index') }}" class="btn btn-primary">
-  Voting Sekarang
-</a>
+              @if($hasVoted)
+                  <p>Anda sudah melakukan voting.</p>
+              @else
+                  <p>Anda belum melakukan voting.</p>
+              @endif
+                  <a href="{{ route('vote.index') }}" class="btn btn-primary">
+                Voting Sekarang
+              </a>
           </div>
         </div>
       </div>

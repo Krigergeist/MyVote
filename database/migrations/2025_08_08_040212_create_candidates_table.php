@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('candidates', function (Blueprint $table) {
-            $table->bigIncrements('cdt_id'); // BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
+            $table->bigIncrements('cdt_id'); 
             $table->string('cdt_name');
             $table->string('cdt_password');
             $table->string('cdt_email')->unique();

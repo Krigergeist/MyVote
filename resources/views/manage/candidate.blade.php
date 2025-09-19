@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container my-4 container-narrow" style="height: 60vh;">
-  <h2 class="text-center mb-4 fw-bold">Manage Candidates</h2>
+  <h2 class="text-center mb-4 fw-bold">kelola kandidat</h2>
 
   {{-- Baris Add Candidate + Search --}}
   <div class="d-flex justify-content-between align-items-center mb-3">

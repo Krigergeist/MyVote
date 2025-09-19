@@ -29,7 +29,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand fw-semibold" href="{{ route('dashboard.admin') }}">MyVote • Admin</a>
-      <span class="badge bg-secondary d-none d-md-inline">Dashboard</span>
+      <span class="badge bg-secondary d-none d-md-inline">kelola kandidat</span>
     </div>
   </nav>
 
